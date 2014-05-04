@@ -1,0 +1,55 @@
+.navbar.navbar-default.navbar-static-top(role='navigation')
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button' data-ng-init='navbarCollapsed = true' data-ng-click='navbarCollapsed = !navbarCollapsed')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(data-ui-sref='home') Angular Starter Kit
+    .navbar-collapse.collapse(data-collapse='navbarCollapsed')
+      ul.nav.navbar-nav
+        li(data-ui-sref-active="active")
+          a(data-ui-sref='info.features') Features
+        li(data-ui-sref-active="active")
+          a(data-ui-sref='info.libraries-tools') Libraries & Tools
+        li(data-ui-sref-active="active")
+          a(data-ui-sref='info.getting-started') Getting Started
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | Vendor Documentation
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='https://docs.angularjs.org/guide' target='_blank') Angular.js
+            li
+              a(href='https://github.com/angular-ui/ui-router/wiki' target='_blank') UI-Router
+            li
+              a(href='http://angular-ui.github.io/bootstrap/' target='_blank') UI-Bootstrap
+            li
+              a(href='http://getbootstrap.com/css/' target='_blank') Bootstrap
+            li
+              a(href='https://github.com/twbs/bootstrap-sass/blob/master/vendor/assets/stylesheets/bootstrap/_variables.scss' target='_blank') Bootstrap Variables
+            li
+              a(href='http://fontawesome.io/' target='_blank') Font Awesome
+            li
+              a(href='http://coffeescript.org/' target='_blank') Coffeescript
+            li
+              a(href='http://sass-lang.com/documentation/file.SASS_REFERENCE.html' target='_blank') SCSS
+            li
+              a(href='http://jade-lang.com/reference/' target='_blank') Jade
+
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | Relevant Tutorials
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Separated link
+            li
+              a(href='#') One more separated link
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='https://github.com/adamalbrecht/angular-starter-kit' target='_blank')
+            i.fa.fa-github.fa-lg
+            |  Source on Github

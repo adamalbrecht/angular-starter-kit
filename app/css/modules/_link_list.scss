@@ -1,0 +1,16 @@
+ul.link-list {
+  font-size: 1.4em;
+  li {
+    margin-bottom:8px;
+  }
+  a {
+    color: $link-color;
+    padding-bottom:3px;
+    border-bottom: dashed 1px $link-dashed-underline-color;
+    text-decoration: none;
+    &:hover {
+      color: darken($link-color, 15%);
+      border-bottom-color: darken($link-dashed-underline-color, 15%);
+    }
+  }
+}
