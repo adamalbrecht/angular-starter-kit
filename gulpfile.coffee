@@ -19,7 +19,10 @@ minifyHTML = require("gulp-minify-html")
 minifyCSS = require("gulp-minify-css")
 imagemin = require('gulp-imagemin')
 pngcrush = require('imagemin-pngcrush')
+
+# Angular Helpers
 ngmin = require("gulp-ngmin")
+htmlify = require('gulp-angular-htmlify')
 
 # Dev Server
 connect = require('gulp-connect')
@@ -79,15 +82,16 @@ gulp.task "scripts", ->
   templates = gulp.src(paths.app.templates)
     .pipe(gulpif(/[.]jade$/, jade()))
     .pipe(gulpif(/[.]md|markdown$/, markdown()))
+    .pipe(htmlify())
     .pipe(templateCache({
         root: "/templates/"
-        standalone: true
-        module: "starter-app.templates"
+        standalone: false
+        module: "starter-app"
       }))
 
   # Streamqueue lets us merge these 3 JS sources while maintaining order
   # and then we concatenate them into app.js
-  streamqueue({objectMode: true}, vendorscripts, templates, appscripts)
+  streamqueue({objectMode: true}, vendorscripts, appscripts, templates)
     .pipe(concat("app.js"))
     .pipe(gulp.dest(paths.build.scripts))
     .pipe(connect.reload()) # Reload via LiveReload on change
@@ -112,6 +116,7 @@ gulp.task 'pages', ->
   gulp.src(paths.app.pages)
     .pipe(gulpif(/[.]jade$/, jade()))
     .pipe(gulpif(/[.]md|markdown$/, markdown()))
+    .pipe(htmlify())
     .pipe(gulp.dest(paths.build.pages))
     .pipe(connect.reload()) # Reload via LiveReload on change
 

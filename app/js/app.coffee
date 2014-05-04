@@ -1,1 +1,1 @@
-app = angular.module("starter-app", ['starter-app.templates', 'ui.router', 'ui.bootstrap'])
+app = angular.module("starter-app", ['ui.router', 'ui.bootstrap'])
