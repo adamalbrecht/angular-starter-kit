@@ -9,7 +9,7 @@ templateCache = require('gulp-angular-templatecache')
 
 # Pre-Processors
 coffee = require("gulp-coffee")
-sass = require("gulp-sass")
+sass = require("gulp-ruby-sass")
 jade = require('gulp-jade')
 markdown = require('gulp-markdown')
 
@@ -103,7 +103,15 @@ gulp.task "scripts", ->
 # =================================================
 gulp.task "styles", ->
   gulp.src(paths.app.styles)
-    .pipe(gulpif(/[.]scss$/, sass({errLogToConsole: true})))
+    .pipe(gulpif(/[.]scss$/, sass({
+      sourcemap: false,
+      unixNewlines: true,
+      style: 'nested',
+      debugInfo: false,
+      quiet: false,
+      lineNumbers: true,
+      bundleExec: true
+    })))
     .pipe(concat("app.css"))
     .pipe(gulp.dest(paths.build.styles))
     .pipe(connect.reload()) # Reload via LiveReload on change
