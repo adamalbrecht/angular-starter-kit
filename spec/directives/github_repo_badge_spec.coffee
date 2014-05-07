@@ -42,10 +42,8 @@ describe "githubRepoBadge", ->
         expect($(element).find('.github-repo-badge-description').text()).toEqual("HTML enhanced for web apps")
 
       it 'displays the star and open issue count', ->
-        console.log($(element).html())
         expect($(element).find('.github-repo-badge-stars').text()).toMatch("23361")
         expect($(element).find('.github-repo-badge-issues').text()).toMatch("1089")
 
       it 'displays the owner avatar', ->
-        console.log "Mock Data avatar:", mockData.owner.avatar_url
         expect($(element).find('.github-repo-badge-avatar').attr('src')).toMatch(mockData.owner.avatar_url)
