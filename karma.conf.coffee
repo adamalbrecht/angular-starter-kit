@@ -13,6 +13,7 @@ module.exports = (config) ->
       }
       transformPath: (path) -> path.replace(/\.js$/, '.coffee')
     }
+    reporters: ['progress', 'osx']
     files: [
       "vendor/bower/jquery/jquery.js"
       "vendor/bower/lodash/dist/lodash.js"

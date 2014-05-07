@@ -26,4 +26,8 @@ app.config(($stateProvider, $urlRouterProvider) ->
       url: "/getting-started",
       templateUrl: "/templates/getting-started.html"
     })
+    .state('info.sample-code', {
+      url: "/sample-code",
+      templateUrl: "/templates/sample-code.html"
+    })
 )
