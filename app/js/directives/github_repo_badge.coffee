@@ -22,7 +22,7 @@ angular.module('starter-app.github').directive 'githubRepoBadge', (GithubAPI) ->
                 <div class='github-repo-badge' data-ng-show='data'>
                   <span class='github-repo-badge-error' data-ng-bind='errorMessage'></span>
                   <div class='github-repo-badge-content' ng-hide='errorMessage'>
-                    <img class='github-repo-badge-avatar' data-ng-src="{{data.owner.avatar_url + 'size=30'}}" />
+                    <img class='github-repo-badge-avatar' ng-if='data.owner.avatar_url' data-ng-src="{{data.owner.avatar_url + 'size=30'}}" />
                     <strong class='github-repo-badge-name' data-ng-bind='data.name'></strong>
                     <div class='github-repo-badge-description' data-ng-bind='data.description'></div>
                     <i class='fa fa-star fa-fw'></i>

@@ -37,13 +37,13 @@ describe "Github Repo Badge Directive", ->
   describe 'with a mock github api', ->
     beforeEach(angular.mock.module('starter-app.github', ($provide) ->
       $provide.value('GithubAPI', mockGithubApi)
-      return # Coffeescript's implicit returns can cause issues when mocking in angular tests
+      return # Coffeescript's implicit returns can cause issues when using DI in angular tests
     ))
     beforeEach(inject((_$compile_, $rootScope, _$q_) ->
       scope = $rootScope
       $compile = _$compile_
       $q = _$q_
-      return # Coffeescript's implicit returns can cause issues when mocking in angular tests
+      return # Coffeescript's implicit returns can cause issues when using DI in angular tests
     ))
     describe 'and the directive is compiled for angular.js', ->
       beforeEach ->
