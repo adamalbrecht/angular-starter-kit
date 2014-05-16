@@ -1,10 +1,12 @@
-describe "githubRepoBadge", ->
-  beforeEach(angular.mock.module('starter-app.directives'))
-  element = undefined
-  scope = undefined
-  describe 'given a mock github api service', ->
-    # This is a mock version of the data that is returned from the Github API
-    mockData = {
+describe "Github Repo Badge Directive", ->
+  element = null
+  scope = null
+  $compile = null
+  $q = null
+  fetchRepoInfoSpy = null
+
+  mockRepoData = {
+    "angular/angular.js": {
       name: "Angular.js"
       html_url: "https://github.com/angular/angular.js"
       description: "HTML enhanced for web apps"
@@ -14,36 +16,64 @@ describe "githubRepoBadge", ->
       language: "JavaScript"
       owner: {
         login: "angular"
-        avatar_url: "https://avatars.githubusercontent.com/u/139426?"
+        avatar_url: "test.png"
       }
     }
-    # Mock the api class, including the promise returned
-    mockGithubRepoApi = {
-      fetchInfo: (username, repo) ->
-        if username == 'angular' && repo == 'angular.js'
-          {
-            success: (callback) ->
-              callback(mockData)
-          }
-    }
-    beforeEach ->
-      module ($provide) ->
-        $provide.value('GithubRepoAPI', mockGithubRepoApi)
-        null
+  }
 
-    describe "a github repo badge for 'angular/angular.js'", ->
-      beforeEach angular.mock.inject(($compile, $rootScope) ->
-        scope = $rootScope
-        element = $compile("<div data-github-repo-badge='angular/angular.js'></div>")(scope)
+  mockGithubApi = {
+    fetchRepoInfo: (username, repo) ->
+      d = $q.defer()
+      repo = mockRepoData["#{username}/#{repo}"]
+      if repo
+        d.resolve(repo)
+      else
+        d.reject("Repo Not Found")
+      d.promise
+  }
+  beforeEach ->
+    fetchRepoInfoSpy = spyOn(mockGithubApi, "fetchRepoInfo").andCallThrough()
+
+  describe 'with a mock github api', ->
+    beforeEach(angular.mock.module('starter-app.github', ($provide) ->
+      $provide.value('GithubAPI', mockGithubApi)
+      return # Coffeescript's implicit returns can cause issues when mocking in angular tests
+    ))
+    beforeEach(inject((_$compile_, $rootScope, _$q_) ->
+      scope = $rootScope
+      $compile = _$compile_
+      $q = _$q_
+      return # Coffeescript's implicit returns can cause issues when mocking in angular tests
+    ))
+    describe 'and the directive is compiled for angular.js', ->
+      beforeEach ->
+        element = angular.element("<div data-github-repo-badge='angular/angular.js'></div>")
+        $compile(element)(scope)
         scope.$digest()
-      )
-      it 'displays the name and description of the repo', ->
-        expect($(element).find('.github-repo-badge-name').text()).toEqual("Angular.js")
-        expect($(element).find('.github-repo-badge-description').text()).toEqual("HTML enhanced for web apps")
+      it "calls the repo's fetchRepoInfo method", ->
+        expect(fetchRepoInfoSpy).toHaveBeenCalledWith('angular', 'angular.js')
 
-      it 'displays the star and open issue count', ->
-        expect($(element).find('.github-repo-badge-stars').text()).toMatch("23361")
-        expect($(element).find('.github-repo-badge-issues').text()).toMatch("1089")
+      describe "The content in the html", ->
+        it 'is visible', ->
+          expect($(element).find('.github-repo-badge-content').hasClass('ng-hide')).toBeFalsy()
+        it "matches the data from the api", ->
+          expect($(element).find('.github-repo-badge-name').text()).toEqual('Angular.js')
+          expect($(element).find('.github-repo-badge-description').text()).toEqual('HTML enhanced for web apps')
+          expect($(element).find('.github-repo-badge-stars').text()).toEqual('23361')
+          expect($(element).find('.github-repo-badge-issues').text()).toEqual('1089')
+          expect($(element).find('.github-repo-badge-avatar').attr('src')).toMatch('test.png')
 
-      it 'displays the owner avatar', ->
-        expect($(element).find('.github-repo-badge-avatar').attr('src')).toMatch(mockData.owner.avatar_url)
+    describe 'and the directive is compiled with a bad repo', ->
+      beforeEach ->
+        element = angular.element("<div data-github-repo-badge='badusername/badrepo'></div>")
+        $compile(element)(scope)
+        scope.$digest()
+
+      it "still calls the repo's fetchRepoInfo method", ->
+        expect(fetchRepoInfoSpy).toHaveBeenCalledWith('badusername', 'badrepo')
+      describe "The content in the html", ->
+        it 'is not visible', ->
+          expect($(element).find('.github-repo-badge-content').hasClass('ng-hide')).toBeTruthy()
+
+        it 'displays the error message', ->
+          expect($(element).find('.github-repo-badge-error').text()).toEqual("Repo Not Found")
