@@ -1,0 +1,22 @@
+.equation-form {
+  @extend .form-inline;
+  &-input-group, &-operator, &-result-label {
+    @extend .form-group;
+    padding-left: 5px;
+    padding-right: 5px;
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+  &-correct {
+    @extend .label;
+    @extend .label-success;
+  }
+  &-incorrect {
+    @extend .label;
+    @extend .label-danger;
+  }
+  input[type='text'] {
+    width: 50px;
+  }
+}

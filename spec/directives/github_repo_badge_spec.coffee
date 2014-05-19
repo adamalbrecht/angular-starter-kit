@@ -26,7 +26,7 @@ describe "Github Repo Badge Directive", ->
       d = $q.defer()
       repo = mockRepoData["#{username}/#{repo}"]
       if repo
-        d.resolve(repo)
+        d.resolve({data: repo})
       else
         d.reject("Repo Not Found")
       d.promise

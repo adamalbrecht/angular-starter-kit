@@ -14,7 +14,7 @@ angular.module('starter-app.github').directive 'githubRepoBadge', (GithubAPI) ->
       repo = vars[1]
       scope.data = null
       GithubAPI.fetchRepoInfo(username, repo).then(
-        (data) -> scope.data = data
+        (data) -> scope.data = data.data
         (errMsg) -> scope.errorMessage = errMsg
       )
 

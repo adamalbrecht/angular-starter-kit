@@ -3,21 +3,38 @@ p The project also includes a sample directive, controller, and service (along w
 
 h3 Directive
 
-p Each of the github widgets below is not only a library used in this project, but a re-usable sample directive whose markup looks like this:
+p The Github repository widgets below are re-usable sample directive whose markup looks like this:
 pre
   | &lt;div github-repo-badge='username/repo'&gt;&lt;/div&gt;
 p You can find this directive at <code>app/js/directives/github_repo_badge.coffee</code> and it's spec counterpart at <code>spec/directives/github_repo_badge_spec.coffee</code>
-h3 Controller
+
+// div(github-repo-badge='angular/angular.js')
+// div(github-repo-badge='gulpjs/gulp')
 
 h3 Service
 
-br
-div(github-repo-badge='angular/angular.js')
-div(github-repo-badge='twbs/bootstrap-sass')
-div(github-repo-badge='nex3/sass')
-div(github-repo-badge='jashkenas/coffee-script')
-div(github-repo-badge='visionmedia/jade')
-div(github-repo-badge='gulpjs/gulp')
-div(github-repo-badge='bower/bower')
-div(github-repo-badge='npm/npm')
-div(github-repo-badge='angular-ui/ui-router')
+p Rather than requesting data from the Github API directly, the Github Repo directive uses a service to request the data. This makes the directive easier to test and gives us the ability to change the data source or add functionality (such as caching) without changing the directive's code.
+
+p You can find the GithubAPI service at <code>app/js/services/github_api.coffee</code> and it's spec at <code>spec/services/github_api_spec.coffee</code>. Both are very lightweight.
+
+div(ng-controller='SampleController')
+  h3 Controller
+
+  p This section is wrapped in a controller found at <code>app/js/controllers/sample_controller.coffee</code>. If the math equation below is found to be incorrect, an error message will display. You can find the spec for this controller at <code>spec/controllers/sample_controller_spec.coffee</code>.
+
+  form(class='equation-form' name='equation_form' role='form' novalidate)
+    .equation-form-input-group
+      label.sr-only(for="a") A
+      input.form-control(type='text' name='a' ng-model='equation.a' ng-required='')
+    .equation-form-operator
+      label +
+    .equation-form-input-group
+      label.sr-only(for="b") B
+      input.form-control(type='text' name='b' ng-model='equation.b' ng-required='')
+    .equation-form-operator
+      label =
+    .equation-form-input-group
+      label.sr-only(for="c") C
+      input.form-control(type='text' name='c' ng-model='equation.c' ng-required='')
+    .equation-form-result-label
+      span(ng-class="'equation-form-' + equationLabel" ng-bind='equationLabel')
