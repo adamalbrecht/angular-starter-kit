@@ -3,7 +3,6 @@ describe "Github Repo Badge Directive", ->
   scope = null
   $compile = null
   $q = null
-  fetchRepoInfoSpy = null
 
   mockRepoData = {
     "angular/angular.js": {
@@ -26,13 +25,13 @@ describe "Github Repo Badge Directive", ->
       d = $q.defer()
       repo = mockRepoData["#{username}/#{repo}"]
       if repo
-        d.resolve({data: repo})
+        d.resolve(repo)
       else
         d.reject("Repo Not Found")
       d.promise
   }
   beforeEach ->
-    fetchRepoInfoSpy = spyOn(mockGithubApi, "fetchRepoInfo").andCallThrough()
+    spyOn(mockGithubApi, "fetchRepoInfo").and.callThrough()
 
   describe 'with a mock github api', ->
     beforeEach(angular.mock.module('starter-app.github', ($provide) ->
@@ -51,7 +50,7 @@ describe "Github Repo Badge Directive", ->
         $compile(element)(scope)
         scope.$digest()
       it "calls the repo's fetchRepoInfo method", ->
-        expect(fetchRepoInfoSpy).toHaveBeenCalledWith('angular', 'angular.js')
+        expect(mockGithubApi.fetchRepoInfo).toHaveBeenCalledWith('angular', 'angular.js')
 
       describe "The content in the html", ->
         it 'is visible', ->
@@ -70,7 +69,7 @@ describe "Github Repo Badge Directive", ->
         scope.$digest()
 
       it "still calls the repo's fetchRepoInfo method", ->
-        expect(fetchRepoInfoSpy).toHaveBeenCalledWith('badusername', 'badrepo')
+        expect(mockGithubApi.fetchRepoInfo).toHaveBeenCalledWith('badusername', 'badrepo')
       describe "The content in the html", ->
         it 'is not visible', ->
           expect($(element).find('.github-repo-badge-content').hasClass('ng-hide')).toBeTruthy()
