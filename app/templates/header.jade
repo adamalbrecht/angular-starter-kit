@@ -9,14 +9,28 @@
       a.navbar-brand(data-ui-sref='home') Angular Starter Kit
     .navbar-collapse.collapse(data-collapse='navbarCollapsed')
       ul.nav.navbar-nav
-        li(data-ui-sref-active="active")
-          a(data-ui-sref='info.features') Features
-        li(data-ui-sref-active="active")
-          a(data-ui-sref='info.libraries-tools') Libraries & Tools
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | Features
+            b.caret
+          ul.dropdown-menu
+            li
+              a(ui-sref='info.package-management') Package Management
+            li
+              a(ui-sref='info.build-system') Build System & Pre-Processors
+            li
+              a(ui-sref='info.project-structure') Project Structure
+            li
+              a(ui-sref='info.included-libraries') Included Libraries
+            li
+              a(ui-sref='info.dev-server') Dev Server
+            li
+              a(ui-sref='info.testing') Testing
+            li
+              a(data-ui-sref='info.sample-code') Sample Angular Code
+
         li(data-ui-sref-active="active")
           a(data-ui-sref='info.getting-started') Getting Started
-        li(data-ui-sref-active="active")
-          a(data-ui-sref='info.sample-code') Sample Code
         li.dropdown
           a.dropdown-toggle(href='#', data-toggle='dropdown')
             | Vendor Documentation

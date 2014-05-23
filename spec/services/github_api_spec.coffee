@@ -17,8 +17,10 @@ describe "Github Repo Badge Directive", ->
   }
 
 
+  # Inject and/or mock our dependencies
   beforeEach(angular.mock.module('starter-app.github'))
   beforeEach(inject((_GithubAPI_, _$httpBackend_, _$rootScope_) ->
+    # Note: Surrounding underscores are ignored by the dependency injector. This allows us to use the original names in our code.
     GithubAPI = _GithubAPI_
     $httpBackend = _$httpBackend_
     $rootScope = _$rootScope_
@@ -28,14 +30,13 @@ describe "Github Repo Badge Directive", ->
   describe '#fetchRepoInfo', ->
     it 'pulls data from the github api', ->
       $httpBackend.expect('GET', 'https://api.github.com/repos/angular/angular.js').respond(200, mockGithubApiResponse)
-
       onFetch = {
         run: (resp) ->
           expect(resp.name).toEqual("Angular.js")
       }
       spyOn(onFetch, 'run').and.callThrough()
       GithubAPI.fetchRepoInfo("angular", "angular.js").then(onFetch.run)
-      $httpBackend.flush()
+      $httpBackend.flush() # This must be run in our tests order to complete our fake http requests.
       expect(onFetch.run).toHaveBeenCalled()
 
     describe 'Given a request for a repo has been made', ->
@@ -52,7 +53,7 @@ describe "Github Repo Badge Directive", ->
         }
         spyOn(onFetch, 'run').and.callThrough()
         GithubAPI.fetchRepoInfo("angular", "angular.js").then(onFetch.run)
-        # I'm not sure why this needs to be called, but if I don't flush the $httpBackend, the promise never resolves.
+        # TODO: I'm not sure why this needs to be called and why it always fails, but if I don't flush the $httpBackend, the promise never resolves.
         try
           $httpBackend.flush()
         catch err

@@ -9,3 +9,4 @@
 7. Run `gulp` in one shell. This will watch your files, auto-compile them, and start a local server.
 8. Run `karma` in another shell. This will automatically run your unit tests.
 9. Open your browser to [http://localhost:9000](http://localhost:90000).
+10. The site you're looking at right now is the default code. You just need to remove what you don't want and replace this content with your own. Have fun!

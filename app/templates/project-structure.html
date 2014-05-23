@@ -1,0 +1,48 @@
+<h1>Project Structure</h1>
+
+<div class='well'>
+  <ul class='project-tree'>
+    <li class='project-tree-subtree'>
+      <strong>app</strong>
+      <ul>
+        <li><em>css</em> - .css and .scss files. It is recommended to import each scss file into main.scss.</li>
+        <li><em>img</em> - image assets</li>
+        <li class='project-tree-subtree'>
+          <em>js</em> - .js and .coffee  files <sup>[1]</sup>
+          <ul>
+            <li><em>controllers</em></li>
+            <li><em>directives</em></li>
+            <li><em>services</em></li>
+            <li><em>app.coffee</em> - Initialize your angular app and inject dependencies.</li>
+            <li><em>routes.coffee</em> - Setup your angular app's routes</li>
+          </ul>
+        </li>
+        <li><em>pages</em> - .html, .jade, and .md files that are intended to be standalone html files</li>
+        <li><em>static</em> - Any other static content that doesn't make sense in the other folders</li>
+        <li><em>templates</em> - .html, .jade, and .md files that are templates for your angular app. These will be saved into the Angular template cache.</li>
+      </ul>
+    </li>
+    <li><strong>generated</strong> - Compiled assets. Don't make changes here because they will be overwritten</li>
+    <li><strong>node_modules</strong> - NPM packages are stored here</li>
+    <li class='project-tree-subtree'><strong>spec</strong> - Unit and e2e tests
+      <ul>
+        <li><em>controllers</em></li>
+        <li><em>directives</em></li>
+        <li><em>e2e</em></li>
+        <li><em>services</em></li>
+      </ul>
+    </li>
+    <li class='project-tree-subtree'>
+      <strong>vendor</strong> - 3rd party libraries
+      <ul>
+        <li><em>bower</em></li>
+        <li><em>css</em></li>
+        <li><em>img</em></li>
+        <li><em>js</em></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<ol class='footnotes' style='font-style:italic'>
+  <li id='fn1'>The project structure of controllers/directives/services works well for small projects, but you may eventually want to re-organize your code into modules based on functionality. For example, a Users module, a Blog Posts module, etc</li>
+</ol>

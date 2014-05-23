@@ -5,6 +5,7 @@ describe 'Sample Controller', ->
   beforeEach(inject(($rootScope, $controller) ->
     $scope = $rootScope.$new()
     ctrl = $controller("SampleController", {$scope: $scope})
+    return # Be careful with coffeescript's implicit returns in Angular DI setup code
   ))
   describe 'by default', ->
     it 'has an equation of 1 + 2 = 3', ->

@@ -33,6 +33,7 @@ describe "Github Repo Badge Directive", ->
   beforeEach ->
     spyOn(mockGithubApi, "fetchRepoInfo").and.callThrough()
 
+  # Inject and/or mock our dependencies
   describe 'with a mock github api', ->
     beforeEach(angular.mock.module('starter-app.github', ($provide) ->
       $provide.value('GithubAPI', mockGithubApi)
@@ -44,6 +45,7 @@ describe "Github Repo Badge Directive", ->
       $q = _$q_
       return # Coffeescript's implicit returns can cause issues when using DI in angular tests
     ))
+
     describe 'and the directive is compiled for angular.js', ->
       beforeEach ->
         element = angular.element("<div data-github-repo-badge='angular/angular.js'></div>")
