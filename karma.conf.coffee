@@ -15,7 +15,6 @@ module.exports = (config) ->
     }
     reporters: ['progress', 'osx']
     files: [
-      "vendor/bower/jasmine-given/dist/jasmine-given.js"
       "vendor/bower/jquery/jquery.js"
       "vendor/bower/lodash/dist/lodash.js"
       "vendor/bower/angular/angular.js"
