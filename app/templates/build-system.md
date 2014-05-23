@@ -1,6 +1,6 @@
 # Build System & Pre-Processors
 
-The code compilation is driven by [Gulp.js](http://gulpjs.com/), a streaming build server. The build process is configured in `Gulpfile.coffee` and outputted code is placed into the `generated` folder.
+The code compilation is driven by [Gulp.js](http://gulpjs.com/), a streaming build system. The build process is configured in `Gulpfile.coffee` and outputted code is placed into the `generated` folder.
 
 ## Code Pre-Processors
 
