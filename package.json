@@ -35,7 +35,8 @@
     "gulp-angular-htmlify": "0.0.8",
     "karma-osx-reporter": "0.0.4",
     "gulp-strip-debug": "~0.3.0",
-    "gulp-ruby-sass": "~0.5.0"
+    "gulp-ruby-sass": "~0.5.0",
+    "coffee-script": "~1.7.1"
   },
   "scripts": {},
   "dependencies": {}
