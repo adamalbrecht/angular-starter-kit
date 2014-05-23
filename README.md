@@ -1,4 +1,8 @@
-# Getting Started
+# Angular Starter Kit
+
+This is an opinionated starter template for crafting single-page web applications using Angular.js, Coffeescript, SCSS, Jade, Bootstrap, UI-Router, Font-Awesome and a few other carefully picked tools that help kick-start web app development. You can find the source code 
+
+## Getting Started
 
 1. I highly recommend that you read through `Gulpfile.coffee`. It's relatively simple and will help you understand how the assets are being compiled in case you run into any issues.
 2. Install dependencies: [NPM](http://npmjs.org), [Ruby](https://www.ruby-lang.org/en/), [Bundler](http://bundler.io/)
