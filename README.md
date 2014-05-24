@@ -16,6 +16,10 @@ This is an opinionated starter template for crafting single-page web application
 10. Open your browser to [http://localhost:9000](http://localhost:90000).
 11. This site is the default code and the documentation. I suggest checking out the sample code page, but then you just need to remove what you don't want and replace this content with your own. Have fun!
 
+## Demo
+
+You can see what the initial template looks like here: [Demo](http://adamalbrecht.github.io/angular-starter-kit/)
+
 ## To-Do
 
 1. Task to compile for production that minifies all the code and places in a "deploy" directory
