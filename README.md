@@ -29,5 +29,4 @@ You can see what the initial template looks like here: [Demo](http://adamalbrech
 ## To-Do
 
 1. Task to compile for production that minifies all the code and places in a "deploy" directory
-2. Example e2e test with Protractor (and add documentation)
-3. Use cache-busting filenames for production mode
+2. Use cache-busting filenames for production mode
