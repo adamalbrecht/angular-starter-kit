@@ -7475,25 +7475,3 @@ ul.link-list {
 /* line 19, ../../../../../../Users/adam/code/angular_starter_kit/app/css/modules/_equation_form.scss */
 .equation-form input[type='text'] {
   width: 50px; }
-
-/* line 1, ../../../../../../Users/adam/code/angular_starter_kit/app/css/modules/_project_tree.scss */
-ul.project-tree {
-  margin: 0;
-  padding: 0; }
-  /* line 4, ../../../../../../Users/adam/code/angular_starter_kit/app/css/modules/_project_tree.scss */
-  ul.project-tree li {
-    padding: 3px 0;
-    border-bottom: solid 1px #ddd;
-    margin: 0;
-    list-style: none; }
-    /* line 9, ../../../../../../Users/adam/code/angular_starter_kit/app/css/modules/_project_tree.scss */
-    ul.project-tree li.project-tree-subtree {
-      border-bottom: none; }
-    /* line 12, ../../../../../../Users/adam/code/angular_starter_kit/app/css/modules/_project_tree.scss */
-    ul.project-tree li em {
-      font-style: italic;
-      font-weight: bold; }
-    /* line 16, ../../../../../../Users/adam/code/angular_starter_kit/app/css/modules/_project_tree.scss */
-    ul.project-tree li ul {
-      padding-left: 20px;
-      list-style: none; }
