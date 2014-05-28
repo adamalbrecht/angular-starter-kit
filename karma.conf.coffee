@@ -24,5 +24,5 @@ module.exports = (config) ->
       "vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js"
       "app/js/app.coffee"
       "app/js/**/*.coffee"
-      "spec/**/*.coffee"
+      "spec/unit/**/*.coffee"
     ]

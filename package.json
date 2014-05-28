@@ -36,8 +36,12 @@
     "karma-osx-reporter": "0.0.4",
     "gulp-strip-debug": "~0.3.0",
     "gulp-ruby-sass": "~0.5.0",
-    "coffee-script": "~1.7.1"
+    "coffee-script": "~1.7.1",
+    "gulp-karma": "0.0.4"
   },
-  "scripts": {},
+  "scripts": {
+    "e2e": "protractor protractor-conf.js",
+    "test": "karma start"
+  },
   "dependencies": {}
 }

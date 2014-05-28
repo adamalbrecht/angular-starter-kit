@@ -30,6 +30,9 @@ connect = require('gulp-connect')
 
 # PATH VARIABLES
 # =================================================
+config =
+  devServerPort: 9000
+
 paths =
   app:
     scripts: ["app/js/app.{coffee,js}", "app/js/**/*.{coffee,js}"] # All .js and .coffee files, starting with app.coffee or app.js
@@ -203,10 +206,10 @@ gulp.task 'watch', ->
 # Run a local server, including LiveReload and
 # API proxying
 # =================================================
-gulp.task 'connect', ->
+gulp.task 'server', ->
   connect.server({
     root: ['generated'],
-    port: 9000,
+    port: config.devServerPort,
     livereload: true
     middleware: (connect, o) ->
       [
@@ -224,4 +227,4 @@ gulp.task "compile", ["clean"], ->
   gulp.start("scripts", "styles", "pages", "images", "fonts", "static")
 
 gulp.task "default", ["clean"], ->
-  gulp.start("scripts", "styles", "pages", "images", "fonts", "static", "connect", "watch")
+  gulp.start("scripts", "styles", "pages", "images", "fonts", "static", "server", "watch")
