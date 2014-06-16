@@ -13,7 +13,7 @@ This is an opinionated starter template for crafting single-page web application
 7. Run `gulp` in one shell. This will watch your files, auto-compile them, and start a local server.
 8. Run `npm run test` in another shell. This will automatically run your unit tests.
 9. Install [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) (optional)
-10. Open your browser to [http://localhost:9000](http://localhost:90000).
+10. Open your browser to [http://localhost:9000](http://localhost:9000).
 11. This site is the default code and the documentation. I suggest checking out the sample code page, but then you just need to remove what you don't want and replace this content with your own. Have fun!
 
 ## Running E2E Tests
