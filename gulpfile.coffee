@@ -31,7 +31,7 @@ connect = require('gulp-connect')
 # PATH VARIABLES
 # =================================================
 config =
-  devServerPort: 9000
+  devServerPort: 9000 # If you change this, you must also change it in protractor-conf.js
 
 paths =
   app:
