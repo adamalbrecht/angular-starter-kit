@@ -12,6 +12,10 @@
 10. Open your browser to [http://localhost:9000](http://localhost:90000).
 11. This site is the default code and the documentation. I suggest checking out the sample code page, but then you just need to remove what you don't want and replace this content with your own. Have fun!
 
+## Deploying for Production
+
+If you run `gulp deploy`, it will compile all the assets and also minify them and then place them into the `deploy` directory.
+
 ## Running E2E Tests
 
 1. `npm install -g protractor` - Install Protractor globally
