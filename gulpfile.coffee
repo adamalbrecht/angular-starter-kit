@@ -63,25 +63,23 @@ paths =
     fonts: "generated/fonts/"
 
 
-# SCRIPT COMPILATION
+# SCRIPT-RELATED HELPERS
 # =================================================
-# Combines coffeescript files from the app with
-# vendor js files into css/app.js and inserts
-# html templates into angular template cache
-# =================================================
-gulp.task "scripts", ->
-  # 3rd party javascripts
-  vendorscripts = gulp.src(paths.vendor.scripts)
 
-  # App Coffeescripts
+# Gather 3rd party javascripts
+compileVendorScripts = -> gulp.src(paths.vendor.scripts)
+
+# Gather and compile App Scripts from coffeescript to JS
+compileAppScripts = ->
   coffeestream = coffee({bare:true})
   coffeestream.on('error', gutil.log)
   appscripts = gulp.src(paths.app.scripts)
     .pipe(gulpif(/[.]coffee$/, coffeestream))
     .pipe(ngmin())
 
-  # Templates are compiled and placed into Angular's
-  # template caching system
+# Templates are compiled into JS and placed into Angular's
+# template caching system
+compileTemplates = ->
   templates = gulp.src(paths.app.templates)
     .pipe(gulpif(/[.]jade$/, jade()))
     .pipe(gulpif(/[.]md|markdown$/, markdown()))
@@ -92,19 +90,16 @@ gulp.task "scripts", ->
         module: "starter-app"
       }))
 
-  # Streamqueue lets us merge these 3 JS sources while maintaining order
-  # and then we concatenate them into app.js
-  streamqueue({objectMode: true}, vendorscripts, appscripts, templates)
+# Concatenate all JS into a single file
+# Streamqueue lets us merge these 3 JS sources while maintaining order
+concatenateAllScripts = ->
+  streamqueue({objectMode: true}, compileVendorScripts(), compileAppScripts(), compileTemplates())
     .pipe(concat("app.js"))
-    .pipe(gulp.dest(paths.build.scripts))
-    .pipe(connect.reload()) # Reload via LiveReload on change
 
-
-# STYLES
+# STYLE-RELATED HELPERS
 # =================================================
-# Compiles SCSS, CSS files into css/app.css
-# =================================================
-gulp.task "styles", ->
+# Gather CSS files and convert scss to css
+compileCss = ->
   gulp.src(paths.app.styles)
     .pipe(gulpif(/[.]scss$/,
       sass({
@@ -118,72 +113,104 @@ gulp.task "styles", ->
       })
       .on('error', gutil.log)
     ))
-    .pipe(concat("app.css"))
-    .pipe(gulp.dest(paths.build.styles))
-    .pipe(connect.reload()) # Reload via LiveReload on change
 
-# MOVE HTML PAGES
+# HTML PAGE RELATED HELPERS
 # =================================================
-# Moves html pages to generated folder
-# =================================================
-gulp.task 'pages', ->
+# Gather jade, html, and markdown files
+# and convert to html. Then make them html5 valid.
+compilePages = ->
   gulp.src(paths.app.pages)
     .pipe(gulpif(/[.]jade$/, jade()))
     .pipe(gulpif(/[.]md|markdown$/, markdown()))
     .pipe(htmlify())
-    .pipe(gulp.dest(paths.build.pages))
-    .pipe(connect.reload()) # Reload via LiveReload on change
 
-# Images
+# IMAGE RELATED HELPERS
 # =================================================
-# Optimize and move images
-# =================================================
-gulp.task 'images', ->
+# Gather and compress images
+compressImages = ->
   gulp.src(paths.app.images)
     .pipe(imagemin({
       progressive: true,
       svgoPlugins: [{removeViewBox: false}],
       use: [pngcrush()]
     }))
-    .pipe(gulp.dest(paths.build.images))
+
+
+# Compile and concatenate all scripts and write to disk
+buildScripts = (buildPath="generated", minify=false) ->
+  scripts = concatenateAllScripts()
+
+  if minify
+    scripts = scripts
+      .pipe(uglify())
+
+  scripts
+    .pipe(gulp.dest("#{buildPath}/js/"))
     .pipe(connect.reload()) # Reload via LiveReload on change
 
-# FONTS
-# =================================================
+# Compile and concatenate css and then write to disk
+buildStyles = (buildPath="generated", minify=false) ->
+  styles = compileCss()
+    .pipe(concat("app.css"))
+
+  if minify
+    styles = styles
+      .pipe(minifyCSS())
+
+  styles
+    .pipe(gulp.dest("#{buildPath}/css/"))
+    .pipe(connect.reload()) # Reload via LiveReload on change
+
+# Moves html pages to generated folder
+buildPages = (buildPath="generated", minify=false) ->
+  pages = compilePages()
+
+  if minify
+    pages = pages
+      .pipe(minifyHTML())
+
+  pages
+    .pipe(gulp.dest(buildPath))
+    .pipe(connect.reload()) # Reload via LiveReload on change
+
+# Optimize and move images
+buildImages = (buildPath="generated") ->
+  compressImages()
+    .pipe(gulp.dest("#{buildPath}/img/"))
+    .pipe(connect.reload()) # Reload via LiveReload on change
+
 # Moves 3rd party fonts into the build folder
-# =================================================
-gulp.task 'fonts', ->
+buildFonts = (buildPath="generated") ->
   gulp.src(paths.vendor.fonts)
-    .pipe(gulp.dest(paths.build.fonts))
+    .pipe(gulp.dest("#{buildPath}/fonts/"))
 
-# Static
-# =================================================
 # Move content in the static folder
-# =================================================
-gulp.task 'static', ->
+buildStatic = (buildPath="generated") ->
   gulp.src(paths.app.static)
-    .pipe(gulp.dest(paths.build.static))
+    .pipe(gulp.dest("#{buildPath}/static/"))
     .pipe(connect.reload()) # Reload via LiveReload on change
 
-# MINFIY
-# =================================================
-# Minify css and js
-# =================================================
-# gulp.task('minify', ['js', 'css'], function() {
-# return gulp.src(['generated/app.js'])
-#   .pipe(uglify())
-#   .pipe(concat("app.min.js"))
-#   .pipe(gulp.dest('generated/js/'))
-# });
+gulp.task "scripts", -> buildScripts()
+gulp.task "styles", -> buildStyles()
+gulp.task "pages", -> buildPages()
+gulp.task "images", -> buildImages()
+gulp.task "fonts", -> buildFonts()
+gulp.task "static", -> buildStatic()
 
-gulp.task 'deploy', ['clean'], ->
-  # minifiy
-  gulp.start("js", "css", "pages", "images", "fonts", "static")
+gulp.task "deploy_scripts", -> buildScripts("deploy", true)
+gulp.task "deploy_styles", -> buildStyles("deploy", true)
+gulp.task "deploy_pages", -> buildPages("deploy", true)
+gulp.task "deploy_images", -> buildImages("deploy")
+gulp.task "deploy_fonts", -> buildFonts("deploy")
+gulp.task "deploy_static", -> buildStatic("deploy")
 
 # CLEAN
 # =================================================
 # Delete contents of the build folder
 # =================================================
+gulp.task "clean_deploy", ->
+  return gulp.src(["deploy"], {read: false})
+    .pipe(clean({force: true}))
 gulp.task "clean", ->
   return gulp.src(["generated"], {read: false})
     .pipe(clean({force: true}))
@@ -225,6 +252,9 @@ gulp.task 'server', ->
 
 gulp.task "compile", ["clean"], ->
   gulp.start("scripts", "styles", "pages", "images", "fonts", "static")
+
+gulp.task 'deploy', ['clean_deploy'], ->
+  gulp.start("deploy_scripts", "deploy_styles", "deploy_pages", "deploy_images", "deploy_fonts", "deploy_static")
 
 gulp.task "default", ["clean"], ->
   gulp.start("scripts", "styles", "pages", "images", "fonts", "static", "server", "watch")

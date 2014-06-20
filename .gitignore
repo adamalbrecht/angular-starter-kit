@@ -4,6 +4,7 @@
 
 /dist
 /generated
+/deploy
 
 .sass-cache
 
