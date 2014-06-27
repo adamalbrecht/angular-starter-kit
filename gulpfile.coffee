@@ -38,7 +38,7 @@ paths =
     scripts: ["app/js/app.{coffee,js}", "app/js/**/*.{coffee,js}"] # All .js and .coffee files, starting with app.coffee or app.js
     styles: "app/css/**/*.{scss,css}" # css and scss files
     pages: "app/pages/*.{html,jade,md,markdown}" # All html, jade,and markdown files that can be reached directly
-    templates: "app/templates/*.{html,jade,md,markdown}" # All html, jade, and markdown files used as templates within the app
+    templates: "app/templates/**/*.{html,jade,md,markdown}" # All html, jade, and markdown files used as templates within the app
     images: "app/img/*.{png,jpg,jpeg,gif}" # All image files
     static: "app/static/*.*" # Any other static content such as the favicon
 
