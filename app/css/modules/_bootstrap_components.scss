@@ -1,24 +1,4 @@
-// Core variables and mixins
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
-
-// Reset and dependencies
-@import "bootstrap/normalize";
-@import "bootstrap/print";
-// We're using Font-Awesome instead
-// @import "vendor/bower/twbs-bootstrap-sass/vendor/assets/stylesheets/bootstrap/glyphicons";
-//
-
-// Core CSS
-@import "bootstrap/scaffolding";
-@import "bootstrap/type";
-@import "bootstrap/code";
-@import "bootstrap/grid";
-@import "bootstrap/tables";
-@import "bootstrap/forms";
-@import "bootstrap/buttons";
-
-// Components
+// Normal Components
 @import "bootstrap/component-animations";
 @import "bootstrap/dropdowns";
 @import "bootstrap/button-groups";
@@ -47,6 +27,5 @@
 @import "bootstrap/popovers";
 @import "bootstrap/carousel";
 
-// Utility classes
-@import "bootstrap/utilities";
-@import "bootstrap/responsive-utilities";
+// We're using Font-Awesome instead
+//@import "bootstrap/glyphicons";

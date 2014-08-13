@@ -2,8 +2,7 @@
 
 // All Bootstrap modules besides the Glypicons icon font are imported.
 // Go to this file and comment out any modules you don't plan to use
-@import "bootstrap_modules";
-
+@import "base/bootstrap_core";
 @import "vendor/bower/font-awesome/scss/font-awesome";
 
 .some-class {
@@ -12,6 +11,8 @@
 
 // BASE STYLES
 // ==========================
+@import "base/bootstrap_basic_styles";
+@import "base/bootstrap_utilities";
 @import "base/headers";
 
 // LAYOUTS
@@ -19,6 +20,7 @@
 
 // MODULES
 // ==========================
+@import "modules/bootstrap_components";
 @import "modules/link_list";
 @import "modules/github_repo_badge";
 @import "modules/equation_form";
