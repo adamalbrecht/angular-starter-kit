@@ -44,7 +44,7 @@ paths =
 
   vendor:
     scripts: [
-      "vendor/bower/jquery/jquery.js"
+      "vendor/bower/jquery/dist/jquery.js"
       "vendor/bower/lodash/dist/lodash.js"
       "vendor/bower/angular/angular.js"
       "vendor/bower/angular-ui-router/release/angular-ui-router.js"
