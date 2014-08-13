@@ -36,7 +36,7 @@ config =
 paths =
   app:
     scripts: ["app/javascripts/app.{coffee,js}", "app/javascripts/**/*.{coffee,js}"] # All .js and .coffee files, starting with app.coffee or app.js
-    styles: "app/stylesheets/**/*.{scss,css}" # css and scss files
+    styles: "app/stylesheets/**/*.{scss,sass,css}" # css and scss files
     pages: "app/pages/*.{html,jade,md,markdown}" # All html, jade,and markdown files that can be reached directly
     templates: "app/templates/**/*.{html,jade,md,markdown}" # All html, jade, and markdown files used as templates within the app
     images: "app/images/*.{png,jpg,jpeg,gif}" # All image files
@@ -115,7 +115,7 @@ gulp.task "deploy_scripts", -> buildScripts("deploy", true)
 # Gather CSS files and convert scss to css
 compileCss = ->
   gulp.src(paths.app.styles)
-    .pipe(gulpif(/[.]scss$/,
+    .pipe(gulpif(/[.]scss|sass$/,
       sass({
         sourcemap: false,
         unixNewlines: true,
