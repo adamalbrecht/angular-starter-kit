@@ -124,7 +124,8 @@ compileCss = ->
         debugInfo: false,
         quiet: false,
         lineNumbers: true,
-        bundleExec: true
+        bundleExec: true,
+        loadPath: ["vendor/bower/twbs-bootstrap-sass/assets/stylesheets/"]
       })
       .on('error', gutil.log)
     ))
