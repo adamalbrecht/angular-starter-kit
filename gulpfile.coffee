@@ -48,7 +48,6 @@ paths =
       "vendor/bower/lodash/dist/lodash.js"
       "vendor/bower/angular/angular.js"
       "vendor/bower/angular-ui-router/release/angular-ui-router.js"
-      "vendor/bower/angular-bootstrap/ui-bootstrap.js"
       "vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js"
     ]
     styles: [] # Bootstrap and Font-Awesome are included using @import in main.scss
