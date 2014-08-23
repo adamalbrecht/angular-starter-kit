@@ -2,7 +2,7 @@
 gulp = require("gulp")
 streamqueue = require("streamqueue")
 gutil = require("gulp-util")
-clean = require("gulp-clean")
+rimraf = require("gulp-rimraf")
 concat = require("gulp-concat")
 gulpif = require('gulp-if')
 templateCache = require('gulp-angular-templatecache')
@@ -231,10 +231,10 @@ gulp.task "deploy_static", -> buildStatic("deploy")
 # =================================================
 gulp.task "clean_deploy", ->
   return gulp.src(["deploy"], {read: false})
-    .pipe(clean({force: true}))
+    .pipe(rimraf({force: true}))
 gulp.task "clean", ->
   return gulp.src(["generated"], {read: false})
-    .pipe(clean({force: true}))
+    .pipe(rimraf({force: true}))
 # =================================================
 
 
