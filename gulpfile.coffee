@@ -21,7 +21,7 @@ imagemin = require('gulp-imagemin')
 pngcrush = require('imagemin-pngcrush')
 
 # Angular Helpers
-ngmin = require("gulp-ngmin")
+ngannotate = require("gulp-ng-annotate")
 htmlify = require('gulp-angular-htmlify')
 
 # Dev Server
@@ -69,7 +69,7 @@ compileAppScripts = ->
   coffeestream.on('error', gutil.log)
   appscripts = gulp.src(paths.app.scripts)
     .pipe(gulpif(/[.]coffee$/, coffeestream))
-    .pipe(ngmin())
+    .pipe(ngannotate())
 
 # Templates are compiled into JS and placed into Angular's
 # template caching system
