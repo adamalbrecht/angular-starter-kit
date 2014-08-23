@@ -13,7 +13,7 @@ Besides supporting vanilla html, js, and css, it supports the following pre-proc
 
 ## Angular-Specific Processing
 
-* [ngmin](https://github.com/btford/ngmin) - Makes your Angular code's dependency injection compatible with jS minifiers.
+* [ng-annotate](https://github.com/olov/ng-annotate) - Makes your Angular code's dependency injection compatible with jS minifiers.
 * [angular-htmlify](https://github.com/pgilad/gulp-angular-htmlify) - Prepends angular attributes in your html with `data-` to make them valid HTML5.
 * [Angular Template Cache](https://github.com/miickel/gulp-angular-templatecache) - Converts your templates to Javascript strings and pre-caches them so that your app doesn't need to make additional http requests.
 
