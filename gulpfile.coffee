@@ -2,7 +2,7 @@
 gulp = require("gulp")
 streamqueue = require("streamqueue")
 gutil = require("gulp-util")
-clean = require("gulp-clean")
+rimraf = require("gulp-rimraf")
 concat = require("gulp-concat")
 gulpif = require('gulp-if')
 templateCache = require('gulp-angular-templatecache')
@@ -21,7 +21,7 @@ imagemin = require('gulp-imagemin')
 pngcrush = require('imagemin-pngcrush')
 
 # Angular Helpers
-ngmin = require("gulp-ngmin")
+ngannotate = require("gulp-ng-annotate")
 htmlify = require('gulp-angular-htmlify')
 
 # Dev Server
@@ -69,7 +69,7 @@ compileAppScripts = ->
   coffeestream.on('error', gutil.log)
   appscripts = gulp.src(paths.app.scripts)
     .pipe(gulpif(/[.]coffee$/, coffeestream))
-    .pipe(ngmin())
+    .pipe(ngannotate())
 
 # Templates are compiled into JS and placed into Angular's
 # template caching system
@@ -231,10 +231,10 @@ gulp.task "deploy_static", -> buildStatic("deploy")
 # =================================================
 gulp.task "clean_deploy", ->
   return gulp.src(["deploy"], {read: false})
-    .pipe(clean({force: true}))
+    .pipe(rimraf({force: true}))
 gulp.task "clean", ->
   return gulp.src(["generated"], {read: false})
-    .pipe(clean({force: true}))
+    .pipe(rimraf({force: true}))
 # =================================================
 
 
