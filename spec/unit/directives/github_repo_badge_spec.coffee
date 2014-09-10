@@ -31,7 +31,7 @@ describe "Github Repo Badge Directive", ->
       d.promise
   }
   beforeEach ->
-    spyOn(mockGithubApi, "fetchRepoInfo").and.callThrough()
+    spyOn(mockGithubApi, "fetchRepoInfo").andCallThrough()
 
   # Inject and/or mock our dependencies
   describe 'with a mock github api', ->

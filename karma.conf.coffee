@@ -20,9 +20,8 @@ module.exports = (config) ->
       "vendor/bower/angular/angular.js"
       "vendor/bower/angular-mocks/angular-mocks.js"
       "vendor/bower/angular-ui-router/release/angular-ui-router.js"
-      "vendor/bower/angular-bootstrap/ui-bootstrap.js"
       "vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js"
-      "app/js/app.coffee"
-      "app/js/**/*.coffee"
+      "app/javascripts/app.coffee"
+      "app/javascripts/**/*.coffee"
       "spec/unit/**/*.coffee"
     ]

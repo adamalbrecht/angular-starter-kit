@@ -34,7 +34,7 @@ describe "Github Repo Badge Directive", ->
         run: (resp) ->
           expect(resp.name).toEqual("Angular.js")
       }
-      spyOn(onFetch, 'run').and.callThrough()
+      spyOn(onFetch, 'run').andCallThrough()
       GithubAPI.fetchRepoInfo("angular", "angular.js").then(onFetch.run)
       $httpBackend.flush() # This must be run in our tests order to complete our fake http requests.
       expect(onFetch.run).toHaveBeenCalled()
@@ -51,7 +51,7 @@ describe "Github Repo Badge Directive", ->
           run: (resp) ->
             expect(resp.name).toEqual("Angular.js")
         }
-        spyOn(onFetch, 'run').and.callThrough()
+        spyOn(onFetch, 'run').andCallThrough()
         GithubAPI.fetchRepoInfo("angular", "angular.js").then(onFetch.run)
         # TODO: I'm not sure why this needs to be called and why it always fails, but if I don't flush the $httpBackend, the promise never resolves.
         try
@@ -66,7 +66,7 @@ describe "Github Repo Badge Directive", ->
           run: (resp) ->
             expect(resp.name).toEqual("Ruby on Rails")
         }
-        spyOn(onFetch, 'run').and.callThrough()
+        spyOn(onFetch, 'run').andCallThrough()
         GithubAPI.fetchRepoInfo("rails", "rails").then(onFetch.run)
         $httpBackend.flush()
         expect(onFetch.run).toHaveBeenCalled()
