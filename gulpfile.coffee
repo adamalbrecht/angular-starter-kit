@@ -90,6 +90,11 @@ concatenateAllScripts = ->
   streamqueue({objectMode: true}, compileVendorScripts(), compileAppScripts(), compileTemplates())
     .pipe(concat("app.js"))
 
+concatenateAllStyles = ->
+  # Add compileVendorStyles() if there are any vendor styles
+  streamqueue({objectMode: true}, compileAppStyles())
+    .pipe(concat("app.css"))
+
 # Compile and concatenate all scripts and write to disk
 buildScripts = (buildPath="generated", minify=false) ->
   scripts = concatenateAllScripts()
@@ -113,7 +118,10 @@ gulp.task "deploy_scripts", -> buildScripts("deploy", true)
 # Compile, concatenate, and (optionally) minify stylesheets
 # =================================================
 # Gather CSS files and convert scss to css
-compileCss = ->
+# compileVendorStyles = ->
+#   gulp.src(paths.vendor.styles)
+
+compileAppStyles = ->
   gulp.src(paths.app.styles)
     .pipe(gulpif(/[.]scss|sass$/,
       sass({
@@ -134,8 +142,7 @@ compileCss = ->
 
 # Compile and concatenate css and then write to disk
 buildStyles = (buildPath="generated", minify=false) ->
-  styles = compileCss()
-    .pipe(concat("app.css"))
+  styles = concatenateAllStyles()
 
   if minify
     styles = styles
